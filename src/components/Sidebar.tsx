@@ -38,7 +38,7 @@ export default function Sidebar() {
         className="mobile-header"
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <img src="/SecApp.png" alt="SecApp Logo" style={{ height: 32, width: 32, borderRadius: 8, objectFit: 'cover' }} />
+          <img src="/SecApp.svg" alt="SecApp Logo" style={{ height: 32, width: 32, borderRadius: 8, objectFit: 'contain' }} />
           <span style={{ fontSize: 18, fontWeight: 800, letterSpacing: '-0.02em' }} className="gradient-text">
             SecApp
           </span>
@@ -103,13 +103,13 @@ export default function Sidebar() {
         <div className="logo-container" style={{ marginBottom: 40, padding: '0 8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 4 }}>
             <img 
-              src="/SecApp.png" 
+              src="/SecApp.svg" 
               alt="SecApp Logo" 
               style={{
                 width: 40,
                 height: 40,
                 borderRadius: 10,
-                objectFit: 'cover',
+                objectFit: 'contain',
                 boxShadow: '0 4px 12px rgba(14, 165, 233, 0.2)',
               }} 
             />
