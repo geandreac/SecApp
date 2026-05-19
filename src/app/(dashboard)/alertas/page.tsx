@@ -5,10 +5,10 @@ import { ALERTAS_MOCK, formatDate } from '@/data/mock-data';
 
 const SEVERITY_ORDER = { critico: 0, alto: 1, moderado: 2, info: 3 };
 const TIPO_LABELS: Record<string, string> = {
-  calado: '🌊 Calado',
-  seca: '☀️ Seca',
-  encalhe: '⚠️ Encalhe',
-  abastecimento: '📦 Abastecimento',
+  calado: 'Calado',
+  seca: 'Seca',
+  encalhe: 'Encalhe',
+  abastecimento: 'Abastecimento',
 };
 
 export default function AlertasPage() {
@@ -105,7 +105,7 @@ export default function AlertasPage() {
 
             <div className="alert-action-box">
               <span className="alert-action-title">
-                💡 Ação Recomendada
+                Ação Recomendada
               </span>
               <p className="alert-action-text">
                 {alerta.acao_recomendada}
@@ -114,7 +114,7 @@ export default function AlertasPage() {
 
             <div className="alert-card-footer">
               <div className="alert-meta-info">
-                <span>📍 {alerta.trecho}</span>
+                <span>{alerta.trecho}</span>
                 <span className="meta-separator">·</span>
                 <span>{formatDate(alerta.criado_em)}</span>
               </div>

@@ -165,9 +165,18 @@ body {
 /* Fluid paddings & gaps for mobile responsiveness */
 .page-container {
   padding: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 @media (min-width: 768px) {
   .page-container {
     padding: 24px 32px;
+  }
+}
+@media (min-width: 1200px) {
+  .page-container {
+    padding: 28px 40px;
   }
 }

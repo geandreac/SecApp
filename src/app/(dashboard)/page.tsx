@@ -132,36 +132,44 @@ export default function DashboardPage() {
         /* KPI grid responsividade */
         .kpis-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 14px;
           margin-bottom: 24px;
+          width: 100%;
+          box-sizing: border-box;
         }
-        @media (max-width: 640px) {
+        @media (max-width: 480px) {
           .kpis-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
           }
           .kpi-card {
-            padding: 14px 12px;
+            padding: 12px 10px;
+            min-width: 0;
           }
           .kpi-value {
-            font-size: 24px;
+            font-size: 22px;
           }
           .kpi-label {
-            font-size: 10px;
+            font-size: 9px;
+            letter-spacing: 0.03em;
           }
           .kpi-unit {
-            font-size: 11px;
+            font-size: 10px;
+          }
+          .kpi-badge {
+            font-size: 9px;
+            padding: 2px 5px;
           }
         }
-        @media (max-width: 360px) {
+        @media (max-width: 320px) {
           .kpis-grid {
             grid-template-columns: 1fr;
           }
         }
         @media (min-width: 1200px) {
           .kpis-grid {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4, minmax(0, 1fr));
           }
         }
 

@@ -54,7 +54,7 @@ export default function HistoricoPage() {
       {/* Período crítico info (Table with scroll indicator) */}
       <div className="glass-card table-card">
         <h2 className="section-title">
-          📅 Calendário de Risco por Rio
+          Calendário de Risco por Rio
         </h2>
         <p className="section-subtitle">
           Período crítico baseado no histórico de 10 anos. Cores indicam meses com maior risco de restrição de calado.
@@ -104,7 +104,7 @@ export default function HistoricoPage() {
       {/* Info sections */}
       <div className="glass-card info-card">
         <h2 className="section-title" style={{ marginBottom: 20 }}>
-          ℹ️ Sobre o Padrão Sazonal
+          Sobre o Padrão Sazonal
         </h2>
         <div className="info-grid">
           <div className="info-block">
@@ -146,13 +146,15 @@ export default function HistoricoPage() {
         /* Summary Grid */
         .summary-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 12px;
           margin-bottom: 24px;
+          width: 100%;
+          box-sizing: border-box;
         }
         @media (min-width: 768px) {
           .summary-grid {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4, minmax(0, 1fr));
           }
         }
         .summary-card {

@@ -3,13 +3,14 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { LayoutDashboard, Map, Bell, BarChart2, X, Menu, Wifi } from 'lucide-react';
 import { RIOS_AMAZONAS } from '@/data/mock-data';
 
 const NAV_ITEMS = [
-  { href: '/', label: 'Dashboard', icon: '📊' },
-  { href: '/mapa', label: 'Mapa Fluvial', icon: '🗺️' },
-  { href: '/alertas', label: 'Alertas', icon: '🔔' },
-  { href: '/historico', label: 'Histórico', icon: '📈' },
+  { href: '/',         label: 'Dashboard',    icon: LayoutDashboard },
+  { href: '/mapa',     label: 'Mapa Fluvial', icon: Map },
+  { href: '/alertas',  label: 'Alertas',      icon: Bell },
+  { href: '/historico',label: 'Histórico',    icon: BarChart2 },
 ];
 
 export default function Sidebar() {
@@ -19,15 +20,12 @@ export default function Sidebar() {
 
   useEffect(() => {
     const renderStatus = () => {
-      // Encontra a data mais recente nas estações de monitoramento das fontes do mock
       const datas = RIOS_AMAZONAS.map(rio => new Date(rio.ultima_atualizacao).getTime());
       const maisRecenteTime = Math.max(...datas);
       const dataMock = new Date(maisRecenteTime);
       const agora = new Date();
-      
       const diffMs = agora.getTime() - maisRecenteTime;
-      
-      // Se a diferença for positiva e menor que 24 horas:
+
       if (diffMs > 0) {
         const diffHoras = Math.floor(diffMs / (1000 * 60 * 60));
         if (diffHoras < 24) {
@@ -40,8 +38,7 @@ export default function Sidebar() {
           return;
         }
       }
-      
-      // Caso contrário (ex. acesso futuro longo), mostramos a data e hora formatada das sources
+
       const options: Intl.DateTimeFormatOptions = {
         day: '2-digit',
         month: '2-digit',
@@ -58,56 +55,32 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Top Header Mobile */}
-      <header
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 64,
-          background: 'var(--bg-glass)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          borderBottom: '1px solid var(--border-subtle)',
-          display: 'none',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '0 16px',
-          zIndex: 999,
-        }}
-        className="mobile-header"
-      >
+      {/* ── Mobile Top Header ─────────────────────────────────── */}
+      <header className="mobile-header">
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <img src="/SecApp.svg" alt="SecApp Logo" style={{ height: 32, width: 32, borderRadius: 8, objectFit: 'contain' }} />
-          <span style={{ fontSize: 18, fontWeight: 800, letterSpacing: '-0.02em' }} className="gradient-text">
+          <img
+            src="/SecApp.svg"
+            alt="SecApp Logo"
+            style={{ height: 32, width: 32, borderRadius: 8, objectFit: 'contain' }}
+          />
+          <span
+            style={{ fontSize: 18, fontWeight: 800, letterSpacing: '-0.02em' }}
+            className="gradient-text"
+          >
             SecApp
           </span>
         </div>
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          style={{
-            background: 'rgba(255, 255, 255, 0.03)',
-            border: '1px solid var(--border-default)',
-            borderRadius: 10,
-            color: 'var(--text-primary)',
-            width: 44,
-            height: 44,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            fontSize: 20,
-            transition: 'background 0.2s',
-          }}
+          className="hamburger-btn"
           aria-label="Abrir menu de navegação"
         >
-          {mobileOpen ? '✕' : '☰'}
+          {mobileOpen ? <X size={20} strokeWidth={2.5} /> : <Menu size={20} strokeWidth={2.5} />}
         </button>
       </header>
 
-      {/* Drawer Overlay */}
+      {/* ── Overlay ───────────────────────────────────────────── */}
       {mobileOpen && (
         <div
           onClick={() => setMobileOpen(false)}
@@ -122,7 +95,7 @@ export default function Sidebar() {
         />
       )}
 
-      {/* Navigation Aside (Desktop & Drawer Mobile) */}
+      {/* ── Sidebar ───────────────────────────────────────────── */}
       <aside
         style={{
           position: 'fixed',
@@ -140,22 +113,25 @@ export default function Sidebar() {
         }}
         className={`sidebar-nav ${mobileOpen ? 'open' : ''}`}
       >
-        {/* Logo (Desktop only) */}
+        {/* Logo */}
         <div className="logo-container" style={{ marginBottom: 40, padding: '0 8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 4 }}>
-            <img 
-              src="/SecApp.svg" 
-              alt="SecApp Logo" 
+            <img
+              src="/SecApp.svg"
+              alt="SecApp Logo"
               style={{
                 width: 40,
                 height: 40,
                 borderRadius: 10,
                 objectFit: 'contain',
                 boxShadow: '0 4px 12px rgba(14, 165, 233, 0.2)',
-              }} 
+              }}
             />
             <div>
-              <h1 style={{ fontSize: 20, fontWeight: 800, letterSpacing: '-0.02em' }} className="gradient-text">
+              <h1
+                style={{ fontSize: 20, fontWeight: 800, letterSpacing: '-0.02em' }}
+                className="gradient-text"
+              >
                 SecApp
               </h1>
               <p style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 500 }}>
@@ -165,70 +141,143 @@ export default function Sidebar() {
           </div>
         </div>
 
-        {/* Navigation Items with Large touch-targets in mobile */}
-        <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {/* Nav Items */}
+        <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
           {NAV_ITEMS.map((item) => {
             const isActive = pathname === item.href;
+            const Icon = item.icon;
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className="nav-link"
+                className={`nav-link ${isActive ? 'nav-link-active' : ''}`}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 14,
-                  padding: '14px 18px',
+                  gap: 12,
+                  padding: '12px 16px',
                   borderRadius: 12,
                   textDecoration: 'none',
                   fontSize: 14,
                   fontWeight: 600,
                   color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
-                  background: isActive ? 'rgba(14, 165, 233, 0.1)' : 'transparent',
-                  border: isActive ? '1px solid rgba(14, 165, 233, 0.15)' : '1px solid transparent',
+                  background: isActive
+                    ? 'linear-gradient(135deg, rgba(14,165,233,0.12), rgba(139,92,246,0.08))'
+                    : 'transparent',
+                  border: isActive
+                    ? '1px solid rgba(14, 165, 233, 0.2)'
+                    : '1px solid transparent',
                   transition: 'all 0.2s ease',
-                  minHeight: 48, /* Touch target standards */
+                  minHeight: 48,
+                  position: 'relative',
                 }}
               >
-                <span style={{ fontSize: 18 }}>{item.icon}</span>
+                {isActive && (
+                  <span
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      width: 3,
+                      height: '60%',
+                      background: 'var(--gradient-primary)',
+                      borderRadius: '0 3px 3px 0',
+                    }}
+                  />
+                )}
+                <Icon
+                  size={18}
+                  strokeWidth={isActive ? 2.5 : 2}
+                  style={{
+                    color: isActive ? 'var(--color-primary)' : 'var(--text-muted)',
+                    flexShrink: 0,
+                    transition: 'color 0.2s',
+                  }}
+                />
                 {item.label}
               </Link>
             );
           })}
         </nav>
 
-        {/* Status footer */}
-        <div style={{
-          padding: '16px',
-          borderRadius: 14,
-          background: 'rgba(14, 165, 233, 0.03)',
-          border: '1px solid var(--border-subtle)',
-          marginTop: 20,
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-            <div style={{
-              width: 8,
-              height: 8,
-              borderRadius: '50%',
-              background: 'var(--color-normal)',
-              boxShadow: '0 0 8px rgba(34, 197, 94, 0.6)',
-            }} />
+        {/* Status Footer */}
+        <div
+          style={{
+            padding: '14px 16px',
+            borderRadius: 14,
+            background: 'rgba(14, 165, 233, 0.03)',
+            border: '1px solid var(--border-subtle)',
+            marginTop: 20,
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+            <Wifi
+              size={12}
+              style={{ color: 'var(--color-normal)', flexShrink: 0 }}
+            />
             <span style={{ fontSize: 12, color: 'var(--text-secondary)', fontWeight: 600 }}>
               Sistema Online
             </span>
           </div>
-          <p style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4 }}>
+          <p style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.5 }}>
             {updateText}
           </p>
-          <p style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4 }}>
+          <p style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.5 }}>
             Fonte: ANA / INMET
           </p>
         </div>
       </aside>
 
       <style>{`
-        /* Desktop styles in aside by default */
+        /* Mobile Header */
+        .mobile-header {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 64px;
+          background: var(--bg-glass);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border-bottom: 1px solid var(--border-subtle);
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 16px;
+          z-index: 999;
+        }
+
+        /* Hamburger Button */
+        .hamburger-btn {
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid var(--border-default);
+          border-radius: 10px;
+          color: var(--text-primary);
+          width: 44px;
+          height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: background 0.2s, border-color 0.2s;
+        }
+        .hamburger-btn:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: var(--color-primary);
+        }
+
+        /* Nav link hover (non-touch devices) */
+        @media (hover: hover) {
+          .nav-link:not(.nav-link-active):hover {
+            background: rgba(255, 255, 255, 0.04) !important;
+            border-color: var(--border-default) !important;
+            color: var(--text-primary) !important;
+          }
+        }
+
+        /* Responsive breakpoints */
         @media (max-width: 1024px) {
           .mobile-header {
             display: flex !important;
