@@ -57,6 +57,14 @@ body {
   background: var(--text-muted); 
 }
 
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
 .glass {
   background: var(--bg-glass);
   backdrop-filter: blur(16px);

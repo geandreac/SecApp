@@ -63,14 +63,22 @@ export default function SeasonalChart() {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 4,
+            right: 12,
+            top: 4,
+            bottom: 4
+          }
+        },
         interaction: { intersect: false, mode: 'index' },
         plugins: {
           legend: {
             position: 'bottom',
             labels: {
               color: '#94a3b8',
-              font: { family: 'Inter', size: 12 },
-              padding: 16,
+              font: { family: 'Inter', size: 11 },
+              padding: 12,
               usePointStyle: true,
             },
           },
@@ -92,13 +100,13 @@ export default function SeasonalChart() {
         scales: {
           x: {
             grid: { color: 'rgba(148, 163, 184, 0.06)' },
-            ticks: { color: '#64748b', font: { family: 'Inter', size: 11 } },
+            ticks: { color: '#64748b', font: { family: 'Inter', size: 10 } },
           },
           y: {
             grid: { color: 'rgba(148, 163, 184, 0.06)' },
             ticks: {
               color: '#64748b',
-              font: { family: 'Inter', size: 11 },
+              font: { family: 'Inter', size: 10 },
               callback: (v) => `${v}m`,
             },
           },
@@ -111,16 +119,29 @@ export default function SeasonalChart() {
 
   return (
     <div>
-      {/* Rio selector */}
-      <div style={{ display: 'flex', gap: 8, marginBottom: 16, flexWrap: 'wrap' }}>
+      {/* Rio selector - horizontal scroll slider with no wrap */}
+      <div 
+        className="hide-scrollbar"
+        style={{ 
+          display: 'flex', 
+          gap: 8, 
+          marginBottom: 16, 
+          overflowX: 'auto',
+          flexWrap: 'nowrap',
+          WebkitOverflowScrolling: 'touch',
+          paddingBottom: 6,
+        }}
+      >
         {RIO_OPTIONS.map((rio) => (
           <button
             key={rio}
             onClick={() => setSelectedRio(rio)}
             style={{
-              padding: '6px 14px', borderRadius: 8, fontSize: 12, fontWeight: 500,
+              padding: '8px 16px', borderRadius: 8, fontSize: 12, fontWeight: 600,
               border: '1px solid',
               cursor: 'pointer', transition: 'all 0.2s',
+              flexShrink: 0,
+              whiteSpace: 'nowrap',
               ...(selectedRio === rio ? {
                 background: 'rgba(14, 165, 233, 0.15)',
                 borderColor: 'rgba(14, 165, 233, 0.4)',
@@ -138,9 +159,22 @@ export default function SeasonalChart() {
       </div>
 
       {/* Chart */}
-      <div className="chart-container">
+      <div className="chart-container-responsive">
         <canvas ref={canvasRef} />
       </div>
+
+      <style>{`
+        .chart-container-responsive {
+          position: relative;
+          width: 100%;
+          height: 300px;
+        }
+        @media (max-width: 640px) {
+          .chart-container-responsive {
+            height: 230px;
+          }
+        }
+      `}</style>
     </div>
   );
 }

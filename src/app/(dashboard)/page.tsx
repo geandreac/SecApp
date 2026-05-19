@@ -138,6 +138,24 @@ export default function DashboardPage() {
         }
         @media (max-width: 640px) {
           .kpis-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+          }
+          .kpi-card {
+            padding: 14px 12px;
+          }
+          .kpi-value {
+            font-size: 24px;
+          }
+          .kpi-label {
+            font-size: 10px;
+          }
+          .kpi-unit {
+            font-size: 11px;
+          }
+        }
+        @media (max-width: 360px) {
+          .kpis-grid {
             grid-template-columns: 1fr;
           }
         }
@@ -212,6 +230,11 @@ export default function DashboardPage() {
 
         .chart-card, .stations-card, .alerts-card {
           padding: 20px;
+        }
+        @media (max-width: 640px) {
+          .chart-card, .stations-card, .alerts-card {
+            padding: 14px;
+          }
         }
 
         .section-title {
@@ -344,6 +367,11 @@ export default function DashboardPage() {
           }
           .dashboard-subtitle {
             font-size: 13px;
+          }
+        }
+        @media (max-width: 640px) {
+          .dashboard-header {
+            margin-bottom: 16px;
           }
         }
       `}</style>

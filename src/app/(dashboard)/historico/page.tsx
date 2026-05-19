@@ -163,6 +163,17 @@ export default function HistoricoPage() {
           align-items: center;
           justify-content: center;
         }
+        @media (max-width: 640px) {
+          .summary-card {
+            padding: 12px 8px;
+          }
+          .summary-value {
+            font-size: 22px;
+          }
+          .summary-label {
+            font-size: 10px;
+          }
+        }
         .summary-value {
           font-size: 28px;
           font-weight: 800;
@@ -177,6 +188,11 @@ export default function HistoricoPage() {
         .chart-card, .table-card, .info-card {
           padding: 20px;
           margin-bottom: 24px;
+        }
+        @media (max-width: 640px) {
+          .chart-card, .table-card, .info-card {
+            padding: 14px;
+          }
         }
 
         .section-title {
@@ -215,6 +231,12 @@ export default function HistoricoPage() {
           margin: 0 -16px;
           padding: 0 16px;
           -webkit-overflow-scrolling: touch;
+        }
+        @media (max-width: 640px) {
+          .table-responsive-wrapper {
+            margin: 0 -14px;
+            padding: 0 14px;
+          }
         }
         @media (min-width: 768px) {
           .table-responsive-wrapper {
