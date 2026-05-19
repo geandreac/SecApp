@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { RIOS_AMAZONAS } from '@/data/mock-data';
 
 const NAV_ITEMS = [
   { href: '/', label: 'Dashboard', icon: '📊' },
@@ -14,6 +15,46 @@ const NAV_ITEMS = [
 export default function Sidebar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [updateText, setUpdateText] = useState('Atualizado: há 2 horas');
+
+  useEffect(() => {
+    const renderStatus = () => {
+      // Encontra a data mais recente nas estações de monitoramento das fontes do mock
+      const datas = RIOS_AMAZONAS.map(rio => new Date(rio.ultima_atualizacao).getTime());
+      const maisRecenteTime = Math.max(...datas);
+      const dataMock = new Date(maisRecenteTime);
+      const agora = new Date();
+      
+      const diffMs = agora.getTime() - maisRecenteTime;
+      
+      // Se a diferença for positiva e menor que 24 horas:
+      if (diffMs > 0) {
+        const diffHoras = Math.floor(diffMs / (1000 * 60 * 60));
+        if (diffHoras < 24) {
+          if (diffHoras === 0) {
+            const diffMinutos = Math.floor(diffMs / (1000 * 60));
+            setUpdateText(`Atualizado: há ${diffMinutos} min`);
+            return;
+          }
+          setUpdateText(`Atualizado: há ${diffHoras} hora${diffHoras > 1 ? 's' : ''}`);
+          return;
+        }
+      }
+      
+      // Caso contrário (ex. acesso futuro longo), mostramos a data e hora formatada das sources
+      const options: Intl.DateTimeFormatOptions = {
+        day: '2-digit',
+        month: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+      };
+      setUpdateText(`Atualizado: ${dataMock.toLocaleString('pt-BR', options)}`);
+    };
+
+    renderStatus();
+    const interval = setInterval(renderStatus, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -178,7 +219,7 @@ export default function Sidebar() {
             </span>
           </div>
           <p style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4 }}>
-            Atualizado: há 2 horas
+            {updateText}
           </p>
           <p style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.4 }}>
             Fonte: ANA / INMET
