@@ -185,9 +185,15 @@ export default function HistoricoPage() {
           font-weight: 600;
         }
 
-        .chart-card, .table-card, .info-card {
+        .chart-card, .info-card {
           padding: 20px;
           margin-bottom: 24px;
+        }
+        .table-card {
+          padding: 20px;
+          margin-bottom: 24px;
+          max-width: 100%;
+          overflow: hidden;
         }
         @media (max-width: 640px) {
           .chart-card, .table-card, .info-card {
@@ -228,6 +234,7 @@ export default function HistoricoPage() {
         /* Tabela Responsiva Estilizada */
         .table-responsive-wrapper {
           overflow-x: auto;
+          width: 100%;
           margin: 0 -16px;
           padding: 0 16px;
           -webkit-overflow-scrolling: touch;
@@ -242,6 +249,7 @@ export default function HistoricoPage() {
           .table-responsive-wrapper {
             margin: 0;
             padding: 0;
+            width: 100%;
           }
         }
 
@@ -249,7 +257,7 @@ export default function HistoricoPage() {
           width: 100%;
           border-collapse: collapse;
           font-size: 13px;
-          min-width: 600px; /* Garante que os meses caibam perfeitamente na rolagem */
+          min-width: 850px; /* Garante que os meses caibam perfeitamente na rolagem */
         }
         .th-rio {
           padding: 10px 16px;

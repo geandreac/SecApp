@@ -37,8 +37,8 @@ export default function Sidebar() {
         }}
         className="mobile-header"
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontSize: 24 }}>🌊</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <img src="/SecApp.png" alt="SecApp Logo" style={{ height: 32, width: 32, borderRadius: 8, objectFit: 'cover' }} />
           <span style={{ fontSize: 18, fontWeight: 800, letterSpacing: '-0.02em' }} className="gradient-text">
             SecApp
           </span>
@@ -102,19 +102,17 @@ export default function Sidebar() {
         {/* Logo (Desktop only) */}
         <div className="logo-container" style={{ marginBottom: 40, padding: '0 8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 4 }}>
-            <div style={{
-              width: 40,
-              height: 40,
-              borderRadius: 12,
-              background: 'var(--gradient-primary)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 20,
-              boxShadow: '0 4px 12px rgba(14, 165, 233, 0.2)',
-            }}>
-              🌊
-            </div>
+            <img 
+              src="/SecApp.png" 
+              alt="SecApp Logo" 
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 10,
+                objectFit: 'cover',
+                boxShadow: '0 4px 12px rgba(14, 165, 233, 0.2)',
+              }} 
+            />
             <div>
               <h1 style={{ fontSize: 20, fontWeight: 800, letterSpacing: '-0.02em' }} className="gradient-text">
                 SecApp

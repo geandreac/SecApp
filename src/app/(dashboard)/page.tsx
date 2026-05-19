@@ -228,8 +228,14 @@ export default function DashboardPage() {
           }
         }
 
-        .chart-card, .stations-card, .alerts-card {
+        .chart-card {
           padding: 20px;
+          max-width: 100%;
+          overflow: hidden;
+        }
+        .stations-card, .alerts-card {
+          padding: 20px;
+          max-width: 100%;
         }
         @media (max-width: 640px) {
           .chart-card, .stations-card, .alerts-card {

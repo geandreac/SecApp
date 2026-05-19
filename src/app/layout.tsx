@@ -12,6 +12,10 @@ export const metadata: Metadata = {
   title: "SecApp — Monitoramento de Seca no Amazonas",
   description: "SaaS de monitoramento e previsão de seca no Estado do Amazonas, com foco em impacto logístico fluvial.",
   keywords: "seca, amazonas, monitoramento, rios, logística fluvial, calado, alerta",
+  icons: {
+    icon: "/SecApp.svg",
+    apple: "/SecApp.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
