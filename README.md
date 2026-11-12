@@ -90,3 +90,12 @@ Para rodar e testar o projeto no seu ambiente de desenvolvimento local, siga as 
 ## 🔒 Licença
 
 Este projeto é desenvolvido para fins de monitoramento demonstrativo e apresentação técnica de portfólio.
+
+## Como clonar
+
+```bash
+git clone https://github.com/geandreac/SecApp.git
+cd SecApp
+npm install
+npm run dev      # http://localhost:3000
+```
